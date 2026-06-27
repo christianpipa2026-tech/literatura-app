@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Desafíos de Literatura — 4.º Año NES</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f5f0;
+    --surface: #ffffff;
+    --surface-2: #f9f9f7;
+    --border: rgba(0,0,0,0.12);
+    --border-strong: rgba(0,0,0,0.22);
+    --text: #1a1a18;
+    --text-sec: #5a5a56;
+    --text-muted: #9a9a96;
+    --accent: #185FA5;
+    --accent-bg: #E6F1FB;
+    --accent-text: #0C447C;
+    --accent-border: #85B7EB;
+    --radius: 8px;
+    --n1-bg: #FCEBEB; --n1-text: #791F1F;
+    --n2-bg: #FAEEDA; --n2-text: #633806;
+    --n3-bg: #EAF3DE; --n3-text: #27500A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --surface: #2a2a27;
+      --surface-2: #222220;
+      --border: rgba(255,255,255,0.1);
+      --border-strong: rgba(255,255,255,0.2);
+      --text: #f0f0ec;
+      --text-sec: #a0a09c;
+      --text-muted: #606060;
+      --accent: #378ADD;
+      --accent-bg: #0C2840;
+      --accent-text: #85B7EB;
+      --accent-border: #185FA5;
+      --n1-bg: #2a1010; --n1-text: #F09595;
+      --n2-bg: #2a1e08; --n2-text: #FAC775;
+      --n3-bg: #0f1f08; --n3-text: #C0DD97;
+    }
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 1.5rem 1rem 3rem; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .app-header { margin-bottom: 1.5rem; }
+  .app-header h1 { font-size: 20px; font-weight: 500; color: var(--text); }
+  .app-header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .login-desc { font-size: 14px; color: var(--text-sec); margin-bottom: 1rem; line-height: 1.5; }
+  .login-row { display: flex; gap: 10px; }
+  .login-row input { flex: 1; padding: 0 12px; height: 40px; border: 0.5px solid var(--border-strong); border-radius: var(--radius); font-size: 14px; background: var(--surface-2); color: var(--text); outline: none; }
+  .login-row input:focus { border-color: var(--accent); }
+  button { cursor: pointer; font-family: inherit; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 0 18px; height: 40px; font-size: 14px; font-weight: 500; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-outline { background: var(--surface-2); color: var(--text-sec); border: 0.5px solid var(--border-strong); border-radius: var(--radius); padding: 0 14px; height: 38px; font-size: 14px; }
+  .btn-outline:hover { background: var(--surface); }
+  .btn-copy { background: var(--surface-2); color: var(--text-sec); border: 0.5px solid var(--border-strong); border-radius: var(--radius); padding: 8px 14px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+  .btn-copy:hover { background: var(--surface); }
+  .section-label { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .cat-btn { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem; cursor: pointer; text-align: left; width: 100%; }
+  .cat-btn:hover { border-color: var(--border-strong); }
+  .cat-btn.active { border: 2px solid var(--accent-border); background: var(--accent-bg); }
+  .cat-icon { font-size: 22px; color: var(--accent); display: block; margin-bottom: 6px; }
+  .cat-label { font-size: 14px; font-weight: 500; color: var(--text); display: block; }
+  .cat-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; display: block; }
+  .ch-header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 1rem; }
+  .tag-cat { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--accent-bg); color: var(--accent-text); }
+  .tag-obra { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--surface-2); color: var(--text-sec); border: 0.5px solid var(--border); }
+  .ch-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .frag { background: var(--surface-2); border-left: 3px solid var(--accent); padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 13px; color: var(--text-sec); font-style: italic; line-height: 1.7; border-radius: 0; }
+  .consigna { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 0.75rem; }
+  .resp-label { font-size: 13px; color: var(--text-sec); margin-bottom: 4px; }
+  textarea { width: 100%; border: 0.5px solid var(--border-strong); border-radius: var(--radius); padding: 10px 12px; font-size: 14px; color: var(--text); background: var(--surface-2); font-family: inherit; resize: vertical; min-height: 100px; outline: none; line-height: 1.6; }
+  textarea:focus { border-color: var(--accent); }
+  .hint-box { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; margin-top: 0.75rem; font-size: 13px; color: var(--text-sec); line-height: 1.6; }
+  .hint-box strong { font-weight: 500; color: var(--text); }
+  .rubrica { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 1rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+  .niv { text-align: center; padding: 8px 6px; border-radius: var(--radius); font-size: 11px; line-height: 1.4; }
+  .niv span { display: block; font-weight: 500; margin-bottom: 3px; font-size: 11px; }
+  .n1 { background: var(--n1-bg); color: var(--n1-text); }
+  .n2 { background: var(--n2-bg); color: var(--n2-text); }
+  .n3 { background: var(--n3-bg); color: var(--n3-text); }
+  .action-row { display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
+  .btn-hint { flex: 1; min-width: 160px; background: var(--surface-2); color: var(--text-sec); border: 0.5px solid var(--border-strong); border-radius: var(--radius); padding: 10px 14px; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+  .btn-hint:hover { background: var(--surface); }
+  .user-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 13px; color: var(--text-sec); margin-bottom: 1rem; }
+  .summary-pre { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; font-size: 12px; color: var(--text-sec); font-family: monospace; white-space: pre-wrap; line-height: 1.6; margin-bottom: 0.75rem; max-height: 280px; overflow-y: auto; }
+  .summary-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+  .badge { background: var(--accent-bg); color: var(--accent-text); font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+  #mainApp { display: none; }
+  #summaryArea { display: none; }
+  @media (max-width: 480px) {
+    .cat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .rubrica { grid-template-columns: 1fr; }
+    .action-row { flex-direction: column; }
+    .btn-hint { min-width: unset; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="app-header">
+    <h1>Desafíos de Literatura</h1>
+    <p>4.º Año NES · Segundo semestre 2026 · La peste y Las cosas que perdimos</p>
+  </div>
+
+  <div class="card" id="loginCard">
+    <p class="login-desc">Ingresá tu nombre para que quede registrado en el resumen de la sesión que vas a poder copiar al final.</p>
+    <div class="login-row">
+      <input type="text" id="nameInput" placeholder="Nombre y apellido" />
+      <button class="btn-primary" onclick="startSession()">Empezar</button>
+    </div>
+  </div>
+
+  <div id="mainApp">
+    <div class="user-chip"><i class="ti ti-user" style="font-size:14px"></i><span id="userLabel"></span></div>
+    <p class="section-label">Elegí una categoría para practicar</p>
+    <div class="cat-grid">
+      <button class="cat-btn" data-cat="analisis" onclick="selectCat(this)">
+        <i class="ti ti-book-2 cat-icon"></i>
+        <span class="cat-label">Análisis literario</span>
+        <span class="cat-desc">Comprensión crítica de fragmentos</span>
+      </button>
+      <button class="cat-btn" data-cat="heroe" onclick="selectCat(this)">
+        <i class="ti ti-shield-half cat-icon"></i>
+        <span class="cat-label">Héroe / antihéroe</span>
+        <span class="cat-desc">Identificación y caracterización</span>
+      </button>
+      <button class="cat-btn" data-cat="ensayo" onclick="selectCat(this)">
+        <i class="ti ti-pencil cat-icon"></i>
+        <span class="cat-label">Escritura de ensayo</span>
+        <span class="cat-desc">Hipótesis, argumentación y estructura</span>
+      </button>
+      <button class="cat-btn" data-cat="gramatica" onclick="selectCat(this)">
+        <i class="ti ti-grammar cat-icon"></i>
+        <span class="cat-label">Gramática y sintaxis</span>
+        <span class="cat-desc">Subordinadas, puntuación, cohesión</span>
+      </button>
+    </div>
+
+    <div id="challengeArea"></div>
+
+    <div id="summaryArea">
+      <div class="card">
+        <div class="summary-title">
+          Resumen de sesión
+          <span class="badge" id="badgeCount"></span>
+        </div>
+        <div class="summary-pre" id="summaryText"></div>
+        <button class="btn-copy" onclick="copySummary()">
+          <i class="ti ti-copy" style="font-size:16px"></i>
+          Copiar resumen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHALLENGES = {
+  analisis: [
+    { obra:"La peste — Camus", titulo:"El silencio de Rieux", fragmento:"\"Rieux decidió entonces redactar el relato que aquí termina, para no ser de los que callan, para testimoniar a favor de los apestados, para dejar por lo menos un recuerdo de la injusticia y de la violencia que les había sido hecha.\"", consigna:"Leé el fragmento. ¿Por qué el narrador elige hablar cuando podría callar? Identificá al menos <strong>dos recursos narrativos</strong> (voz, tiempo verbal, punto de vista) y explicá qué efecto producen.", pista:"Prestá atención al verbo 'decidió' y al uso de 'aquí': ¿quién habla, desde dónde, y para qué? El testimonio como acto ético es clave en el existencialismo.", niveles:["Resume lo que dice Rieux sin analizar el cómo.","Identifica un recurso y lo nombra, pero no lo vincula con el sentido.","Vincula voz narrativa, contexto histórico y ética del testimonio con citas."] },
+    { obra:"Las cosas que perdimos — Enriquez", titulo:"La casa como personaje", fragmento:"\"La casa estaba viva. No de manera metafórica: la casa respiraba, sudaba por sus paredes húmedas, crujía cuando alguien la miraba demasiado fijo.\"", consigna:"Enriquez afirma que la casa 'estaba viva' y luego niega que sea metáfora. Analizá esa operación literaria: ¿qué figura retórica construye? ¿Qué efecto produce en el género del texto? Usá al menos un concepto de teoría literaria.", pista:"Pensá en la diferencia entre personificación, animismo narrativo y realismo mágico. ¿La autora juega con las expectativas del lector sobre lo real?", niveles:["Describe lo que pasa sin identificar figuras.","Nombra la personificación pero no explica la operación de negar la metáfora.","Analiza la paradoja retórica y la vincula con el género terror/fantástico."] },
+    { obra:"La peste — Camus", titulo:"Orán y la indiferencia", fragmento:"\"Lo que se notaba era la ausencia de amor y de amistades. Cuando alguien conoce bien una ciudad, puede adivinar lo que la gente hace por las tardes. Orán era una ciudad sin indicios.\"", consigna:"¿Qué dice Camus de Orán a través de la 'ausencia'? Analizá cómo el narrador construye el ambiente moral de la ciudad. ¿Qué relación tiene esto con el absurdo existencialista?", pista:"La ausencia no es solo descripción: es caracterización moral de sus habitantes. El narrador usa la negación como recurso.", niveles:["Describe la ciudad como si fuera un resumen.","Identifica el tono negativo pero no lo conecta con el existencialismo.","Analiza la ausencia como dispositivo retórico y la vincula con el contexto filosófico."] }
+  ],
+  heroe: [
+    { obra:"La peste — Camus", titulo:"¿Rieux es un héroe?", fragmento:"\"El doctor Rieux decidió no llamarse a sí mismo héroe. Simplemente hacía lo que había que hacer, y pensaba que no había otra manera de responder a la peste.\"", consigna:"Según el modelo del héroe moderno visto en clase, ¿Rieux encaja en héroe, antihéroe o ninguna de las dos? Justificá con al menos <strong>tres rasgos específicos</strong> del personaje tomados del texto.", pista:"El héroe moderno no busca reconocimiento ni actúa por gloria. ¿Qué lo distingue del héroe clásico (Aquiles, Hércules)? ¿Y del antihéroe que rechaza los valores colectivos?", niveles:["Dice 'Rieux es bueno porque ayuda' sin usar el marco teórico.","Usa la categoría pero sin justificar con rasgos textuales.","Aplica el modelo teórico con tres rasgos citados y los contrasta con el héroe clásico."] },
+    { obra:"Las cosas que perdimos — Enriquez", titulo:"La heroína que no salva", fragmento:"\"Ella sabía que no podía rescatarla. No tenía los instrumentos para eso. Solo podía quedarse, mirar, y escribir después lo que había visto.\"", consigna:"¿Cómo construye Enriquez un modelo de 'heroína' femenina? Compará su rol con el del héroe activo clásico. ¿Qué dice esta elección sobre la perspectiva de género en la narrativa de la autora?", pista:"El acto de 'quedarse y mirar' puede leerse como impotencia o como resistencia y testimonio. ¿Cuál es la diferencia entre pasividad y presencia activa?", niveles:["Dice que la protagonista 'no es heroína porque no hace nada'.","Identifica el contraste con el héroe activo pero no aborda el género.","Analiza la resistencia como heroísmo alternativo y la vincula con los estudios de género."] },
+    { obra:"Camus / Enriquez", titulo:"Héroe colectivo vs. individual", fragmento:"\"En Orán todos luchaban, pero nadie era el héroe.\" / \"Ella era la única que recordaba los nombres de los que ya no estaban.\"", consigna:"A partir de ambos fragmentos, analizá la tensión entre héroe individual y colectivo. ¿Cómo cada autor/a resuelve esa tensión? ¿Qué modelo de identidad propone cada texto?", pista:"No describas uno y después el otro. Buscá el punto de contacto y la diferencia central entre las dos resoluciones.", niveles:["Describe un texto y luego el otro sin establecer comparación.","Identifica una diferencia pero no analiza qué modelo de identidad propone cada uno.","Construye una tesis comparativa y la desarrolla con citas de ambos textos."] }
+  ],
+  ensayo: [
+    { obra:"La peste — Camus", titulo:"Formulá una tesis", fragmento:"Tema: El silencio como complicidad en 'La peste'.", consigna:"Escribí una sola oración que: (a) tome una posición clara, (b) no sea obvia ni descriptiva, (c) pueda ser debatida. Luego enumerá tres argumentos con los que la defenderías, incluyendo una contraargumentación.", pista:"Tesis débil: 'En La peste el silencio es importante'. Tesis fuerte: 'El silencio de los habitantes de Orán no es ignorancia sino una elección que los convierte en cómplices del absurdo'.", niveles:["Escribe una opinión personal sin tesis académica.","Formula una tesis pero es descriptiva o no puede debatirse.","Formula una tesis debatible con tres argumentos y contraargumentación."] },
+    { obra:"Camus / Enriquez", titulo:"La introducción del ensayo comparativo", fragmento:"Tu ensayo debe comparar la figura del héroe en Camus y en Enriquez.", consigna:"Redactá <strong>únicamente la introducción</strong> (3 a 5 oraciones). Debe incluir: presentación de las obras, planteamiento del problema e hipótesis central. Prohibido usar 'yo creo'. Usá al menos una subordinada adjetiva.", pista:"Estructura: contexto de las obras → pregunta o problema → tu hipótesis. La introducción no presenta argumentos, solo instala la pregunta y tu respuesta tentativa.", niveles:["Empieza con 'Este ensayo trata sobre...' y no formula hipótesis.","Presenta las obras y tiene una idea central pero sin hipótesis debatible.","Introduce obras, plantea el problema y formula hipótesis con subordinada adjetiva."] },
+    { obra:"Las cosas que perdimos — Enriquez", titulo:"La contraargumentación", fragmento:"Tesis: 'Las protagonistas de Enriquez representan una forma de resistencia ante el horror.'", consigna:"Escribí un párrafo de <strong>contraargumentación</strong>: presentá el argumento contrario más fuerte posible y luego refutalo. Usá conectores de concesión (si bien, aunque) y de refutación (sin embargo, no obstante).", pista:"Un buen contraargumento es el que tu lector más escéptico diría. Si el argumento contrario es flojo, tu refutación no vale nada.", niveles:["Escribe solo el argumento a favor, sin contraargumentación.","Presenta una objeción pero la refutación es débil y usa solo 'pero'.","Construye una objeción sólida y la refuta con conectores y argumentos textuales."] }
+  ],
+  gramatica: [
+    { obra:"La peste — Camus", titulo:"Subordinadas adjetivas: transformá el texto", fragmento:"\"El médico llegó tarde. El médico era Rieux. La ciudad estaba silenciosa. La ciudad había sido atacada por la epidemia.\"", consigna:"Reescribí las cuatro oraciones uniéndolas con pronombres relativos (que, cuyo, cual, quien) para formar <strong>dos oraciones complejas</strong> con subordinadas adjetivas. No podés agregar información nueva.", pista:"Ejemplo: 'El médico que llegó tarde era Rieux.' ¿Podés usar 'cuyo' o 'en quien'? Atención: 'cuyo' concuerda con el sustantivo que le sigue, no con el antecedente.", niveles:["Une las oraciones con 'y' o 'porque' sin usar relativos.","Usa 'que' correctamente pero no intenta 'cuyo', 'quien' u otras formas.","Construye dos oraciones con al menos dos relativos distintos y concordancia perfecta."] },
+    { obra:"Las cosas que perdimos — Enriquez", titulo:"Puntuación avanzada: punto y coma y rayas", fragmento:"\"Ella no tenía miedo de la casa tenía miedo de lo que la casa recordaba la casa guardaba secretos viejos secretos que nadie quería nombrar pero que todos habían vivido.\"", consigna:"El fragmento está sin puntuación. Reescribilo usando al menos un <strong>punto y coma</strong> y una <strong>raya</strong> (—). Explicá en una línea por qué elegiste cada signo.", pista:"El punto y coma separa ideas relacionadas pero autónomas. La raya introduce una aclaración dentro de la oración. No las intercambies.", niveles:["Usa solo puntos y comas sin rayas, o las usa incorrectamente.","Usa los signos pero no puede explicar la función de cada uno.","Puntúa correctamente y justifica cada signo con su función gramatical."] },
+    { obra:"La peste — Camus", titulo:"Cohesión: eliminá las repeticiones", fragmento:"\"Rieux vio la rata. La rata estaba muerta. Rieux no le dio importancia a la rata. Rieux siguió caminando. La rata era la primera de muchas ratas.\"", consigna:"Reescribí el párrafo eliminando repeticiones mediante: (a) pronombres, (b) sinónimos o hiperónimos, (c) elipsis. Mantené exactamente la misma información.", pista:"No siempre hay que poner 'ella' donde dice 'la rata': a veces la elipsis funciona mejor. Hiperónimo de 'rata' podría ser 'el roedor' o 'el animal'.", niveles:["Elimina algunas repeticiones pero genera ambigüedad referencial.","Usa pronombres y un sinónimo pero el texto queda fragmentado.","Logra un texto cohesivo usando los tres mecanismos con referencia clara."] }
+  ]
+};
+
+const catLabels = { analisis:"Análisis literario", heroe:"Héroe / antihéroe", ensayo:"Escritura de ensayo", gramatica:"Gramática y sintaxis" };
+let userName = "", currentCat = null, currentIndex = null, hintVisible = false, log = [];
+
+function startSession() {
+  const n = document.getElementById("nameInput").value.trim();
+  if (!n) { document.getElementById("nameInput").focus(); return; }
+  userName = n;
+  document.getElementById("loginCard").style.display = "none";
+  document.getElementById("mainApp").style.display = "block";
+  document.getElementById("userLabel").textContent = userName;
+}
+
+document.getElementById("nameInput").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") startSession();
+});
+
+function selectCat(btn) {
+  document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  currentCat = btn.dataset.cat;
+  hintVisible = false;
+  showChallenge();
+}
+
+function showChallenge(forceNew) {
+  if (!currentCat) return;
+  saveCurrentResponse();
+  const pool = CHALLENGES[currentCat];
+  let idx = currentIndex;
+  if (forceNew || idx === null) {
+    let newIdx;
+    do { newIdx = Math.floor(Math.random() * pool.length); } while (pool.length > 1 && newIdx === idx);
+    idx = newIdx;
+  }
+  currentIndex = idx;
+  hintVisible = false;
+  renderChallenge(pool[idx]);
+  updateSummary();
+}
+
+function saveCurrentResponse() {
+  const ta = document.getElementById("respInput");
+  if (!ta || !currentCat) return;
+  const txt = ta.value.trim();
+  if (!txt) return;
+  const ch = CHALLENGES[currentCat][currentIndex];
+  log.push({ cat: catLabels[currentCat], titulo: ch.titulo, obra: ch.obra, respuesta: txt, ts: new Date().toLocaleTimeString("es-AR", { hour:"2-digit", minute:"2-digit" }) });
+}
+
+function renderChallenge(c) {
+  document.getElementById("challengeArea").innerHTML = `
+    <div class="card">
+      <div class="ch-header">
+        <span class="tag-cat">${catLabels[currentCat]}</span>
+        <span class="tag-obra">${c.obra}</span>
+      </div>
+      <p class="ch-title">${c.titulo}</p>
+      <div class="frag">${c.fragmento}</div>
+      <p class="consigna">${c.consigna}</p>
+      <p class="resp-label">Tu respuesta:</p>
+      <textarea id="respInput" placeholder="Escribí tu análisis acá..."></textarea>
+      <div id="hintArea"></div>
+      <div class="rubrica">
+        <div class="niv n1"><span>Nivel 1 — inicial</span>${c.niveles[0]}</div>
+        <div class="niv n2"><span>Nivel 2 — en desarrollo</span>${c.niveles[1]}</div>
+        <div class="niv n3"><span>Nivel 3 — dominio</span>${c.niveles[2]}</div>
+      </div>
+      <div class="action-row">
+        <button class="btn-hint" onclick="toggleHint()"><i class="ti ti-bulb" style="font-size:16px"></i>Ver pista del docente</button>
+        <button class="btn-outline" onclick="showChallenge(true)"><i class="ti ti-refresh" style="font-size:16px;margin-right:4px"></i>Otro desafío</button>
+      </div>
+    </div>`;
+  window._pista = c.pista;
+}
+
+function toggleHint() {
+  const area = document.getElementById("hintArea");
+  if (!area) return;
+  if (hintVisible) { area.innerHTML = ""; hintVisible = false; }
+  else { area.innerHTML = `<div class="hint-box"><strong>Pista:</strong> ${window._pista}</div>`; hintVisible = true; }
+}
+
+function updateSummary() {
+  if (log.length === 0) { document.getElementById("summaryArea").style.display = "none"; return; }
+  document.getElementById("summaryArea").style.display = "block";
+  document.getElementById("badgeCount").textContent = log.length + (log.length === 1 ? " desafío" : " desafíos");
+  let txt = `RESUMEN DE SESIÓN — Literatura 4.º Año NES\nAlumno/a: ${userName}\nFecha: ${new Date().toLocaleDateString("es-AR")}\n${"=".repeat(48)}\n\n`;
+  log.forEach((e, i) => {
+    txt += `DESAFÍO ${i+1} (${e.ts})\nCategoría: ${e.cat}\nActividad: ${e.titulo}\nObra: ${e.obra}\n\nRespuesta:\n${e.respuesta}\n\n${"-".repeat(40)}\n\n`;
+  });
+  txt += `Total de desafíos realizados: ${log.length}\n`;
+  document.getElementById("summaryText").textContent = txt;
+}
+
+function copySummary() {
+  saveCurrentResponse();
+  updateSummary();
+  const txt = document.getElementById("summaryText").textContent;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = event.target.closest("button");
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="ti ti-check" style="font-size:16px"></i> Copiado';
+    setTimeout(() => btn.innerHTML = orig, 2000);
+  });
+}
+</script>
+</body>
+</html>
