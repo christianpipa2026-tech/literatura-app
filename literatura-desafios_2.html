@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Desafíos de Literatura — 4.º Año NES</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#f5f5f0;--surface:#fff;--surface2:#f9f9f7;
+  --border:rgba(0,0,0,0.12);--border-s:rgba(0,0,0,0.22);
+  --text:#1a1a18;--text-sec:#5a5a56;--text-muted:#9a9a96;
+  --accent:#185FA5;--accent-bg:#E6F1FB;--accent-text:#0C447C;--accent-border:#85B7EB;
+  --radius:8px;
+  --n1-bg:#FCEBEB;--n1-tx:#791F1F;--n2-bg:#FAEEDA;--n2-tx:#633806;--n3-bg:#EAF3DE;--n3-tx:#27500A;
+  --ext-bg:#EEEDFE;--ext-tx:#3C3489;--ext-border:#AFA9EC;
+  --u1:#E6F1FB;--u1t:#0C447C;--u1b:#85B7EB;
+  --u2:#FCEBEB;--u2t:#791F1F;--u2b:#F09595;
+  --u3:#EAF3DE;--u3t:#27500A;--u3b:#97C459;
+  --u4:#EEEDFE;--u4t:#3C3489;--u4b:#AFA9EC;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1a1a18;--surface:#2a2a27;--surface2:#222220;
+    --border:rgba(255,255,255,0.1);--border-s:rgba(255,255,255,0.2);
+    --text:#f0f0ec;--text-sec:#a0a09c;--text-muted:#606060;
+    --accent:#378ADD;--accent-bg:#0C2840;--accent-text:#85B7EB;--accent-border:#185FA5;
+    --n1-bg:#2a1010;--n1-tx:#F09595;--n2-bg:#2a1e08;--n2-tx:#FAC775;--n3-bg:#0f1f08;--n3-tx:#C0DD97;
+    --ext-bg:#1a1840;--ext-tx:#AFA9EC;--ext-border:#534AB7;
+    --u1:#0C2840;--u1t:#85B7EB;--u1b:#185FA5;
+    --u2:#2a1010;--u2t:#F09595;--u2b:#A32D2D;
+    --u3:#0f1f08;--u3t:#C0DD97;--u3b:#3B6D11;
+    --u4:#1a1840;--u4t:#AFA9EC;--u4b:#534AB7;
+  }
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1.5rem 1rem 4rem;}
+.wrap{max-width:640px;margin:0 auto;}
+.app-header{margin-bottom:1.5rem;}
+.app-header h1{font-size:20px;font-weight:500;}
+.app-header p{font-size:13px;color:var(--text-muted);margin-top:2px;}
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+input[type=text]{width:100%;padding:0 12px;height:40px;border:0.5px solid var(--border-s);border-radius:var(--radius);font-size:14px;background:var(--surface2);color:var(--text);outline:none;font-family:inherit;}
+input[type=text]:focus{border-color:var(--accent);}
+button{cursor:pointer;font-family:inherit;transition:opacity .15s;}
+.btn-primary{background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:0 18px;height:40px;font-size:14px;font-weight:500;margin-top:.75rem;}
+.btn-primary:hover{opacity:.9;}
+.btn-outline{background:var(--surface2);color:var(--text-sec);border:0.5px solid var(--border-s);border-radius:var(--radius);padding:0 14px;height:38px;font-size:14px;display:inline-flex;align-items:center;gap:6px;}
+.btn-outline:hover{background:var(--surface);}
+.label-sm{font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:.75rem;display:block;}
+.unit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:1.25rem;}
+.unit-btn{border-radius:12px;padding:.9rem 1rem;cursor:pointer;text-align:left;width:100%;border:0.5px solid var(--border);background:var(--surface);}
+.unit-btn:hover{border-color:var(--border-s);}
+.unit-btn.u1{--ub:var(--u1b);--ubg:var(--u1);--utx:var(--u1t);}
+.unit-btn.u2{--ub:var(--u2b);--ubg:var(--u2);--utx:var(--u2t);}
+.unit-btn.u3{--ub:var(--u3b);--ubg:var(--u3);--utx:var(--u3t);}
+.unit-btn.u4{--ub:var(--u4b);--ubg:var(--u4);--utx:var(--u4t);}
+.unit-btn.active{border:2px solid var(--ub);background:var(--ubg);}
+.unit-btn .un{font-size:11px;font-weight:500;color:var(--utx);display:block;margin-bottom:3px;}
+.unit-btn .ul{font-size:13px;font-weight:500;color:var(--text);display:block;}
+.unit-btn .ud{font-size:11px;color:var(--text-muted);margin-top:2px;display:block;}
+.unit-btn.active .ul{color:var(--utx);}
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:1.25rem;}
+.cat-btn{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:.9rem 1rem;cursor:pointer;text-align:left;width:100%;}
+.cat-btn:hover{border-color:var(--border-s);}
+.cat-btn.active{border:2px solid var(--accent-border);background:var(--accent-bg);}
+.cat-btn .ci{font-size:20px;color:var(--accent);display:block;margin-bottom:5px;}
+.cat-btn .cl{font-size:14px;font-weight:500;color:var(--text);display:block;}
+.cat-btn .cd{font-size:12px;color:var(--text-muted);margin-top:1px;display:block;}
+.cat-btn.active .cl{color:var(--accent-text);}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted);background:none;border:none;padding:0;margin-bottom:.75rem;cursor:pointer;}
+.back-btn:hover{color:var(--text);}
+.ch-header{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:.9rem;align-items:center;}
+.tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;}
+.tag-cat{background:var(--accent-bg);color:var(--accent-text);}
+.tag-obra{background:var(--surface2);color:var(--text-sec);border:0.5px solid var(--border);}
+.tag-mie{background:#FAEEDA;color:#633806;}
+.tag-jue{background:#EAF3DE;color:#27500A;}
+@media(prefers-color-scheme:dark){.tag-mie{background:#2a1e08;color:#FAC775;}.tag-jue{background:#0f1f08;color:#C0DD97;}}
+.ch-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px;line-height:1.4;}
+.frag{background:var(--surface2);border-left:3px solid var(--accent);padding:.75rem 1rem;margin:.75rem 0;font-size:13px;color:var(--text-sec);font-style:italic;line-height:1.7;}
+.consigna{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:.75rem;}
+.resp-label{font-size:13px;color:var(--text-sec);margin-bottom:4px;}
+textarea{width:100%;border:0.5px solid var(--border-s);border-radius:var(--radius);padding:10px 12px;font-size:14px;color:var(--text);background:var(--surface2);font-family:inherit;resize:vertical;min-height:100px;outline:none;line-height:1.6;}
+textarea:focus{border-color:var(--accent);}
+.save-indicator{font-size:12px;color:var(--text-muted);margin-top:4px;min-height:16px;}
+.save-indicator.saved{color:var(--n3-tx);}
+.hint-box{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius);padding:.75rem 1rem;margin-top:.75rem;font-size:13px;color:var(--text-sec);line-height:1.6;}
+.hint-box strong{font-weight:500;color:var(--text);}
+.rubrica{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border);}
+.niv{text-align:center;padding:8px 6px;border-radius:var(--radius);font-size:11px;line-height:1.4;}
+.niv span{display:block;font-weight:500;margin-bottom:3px;}
+.n1{background:var(--n1-bg);color:var(--n1-tx);}
+.n2{background:var(--n2-bg);color:var(--n2-tx);}
+.n3{background:var(--n3-bg);color:var(--n3-tx);}
+.action-row{display:flex;gap:10px;margin-top:1rem;flex-wrap:wrap;}
+.btn-hint{flex:1;min-width:160px;background:var(--surface2);color:var(--text-sec);border:0.5px solid var(--border-s);border-radius:var(--radius);padding:10px 14px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+.btn-hint:hover{background:var(--surface);}
+.user-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:0.5px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px;color:var(--text-sec);margin-bottom:1rem;}
+.mode-tabs{display:flex;gap:8px;margin-bottom:1.25rem;}
+.mode-tab{padding:7px 16px;border-radius:var(--radius);font-size:13px;font-weight:500;border:0.5px solid var(--border-s);background:var(--surface2);color:var(--text-sec);cursor:pointer;}
+.mode-tab.active{background:var(--accent-bg);color:var(--accent-text);border-color:var(--accent-border);}
+.borrador-notice{background:var(--n2-bg);border:0.5px solid #EF9F27;border-radius:var(--radius);padding:.6rem .9rem;font-size:13px;color:var(--n2-tx);margin-bottom:.75rem;display:flex;align-items:center;gap:8px;}
+@media(prefers-color-scheme:dark){.borrador-notice{background:#2a1e08;color:#FAC775;border-color:#BA7517;}}
+.ext-card{background:var(--ext-bg);border:0.5px solid var(--ext-border);border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.ext-header{display:flex;align-items:center;gap:8px;margin-bottom:.75rem;}
+.ext-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:var(--ext-border);color:var(--ext-tx);}
+.ext-title{font-size:15px;font-weight:500;color:var(--ext-tx);margin-bottom:6px;}
+.ext-desc{font-size:13px;color:var(--ext-tx);line-height:1.6;opacity:.85;}
+.ext-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:.75rem;}
+.ext-item{background:var(--surface);border:0.5px solid var(--ext-border);border-radius:var(--radius);padding:.85rem 1rem;cursor:pointer;}
+.ext-item:hover{border-color:var(--accent);}
+.ext-item-label{font-size:13px;font-weight:500;color:var(--ext-tx);display:block;margin-bottom:3px;}
+.ext-item-desc{font-size:12px;color:var(--text-muted);}
+.summary-card{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;margin-top:1rem;}
+.summary-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.75rem;display:flex;align-items:center;gap:8px;}
+.badge{background:var(--accent-bg);color:var(--accent-text);font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;}
+.summary-pre{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius);padding:.75rem 1rem;font-size:12px;color:var(--text-sec);font-family:monospace;white-space:pre-wrap;line-height:1.6;margin-bottom:.75rem;max-height:260px;overflow-y:auto;}
+.btn-copy{background:var(--surface2);color:var(--text-sec);border:0.5px solid var(--border-s);border-radius:var(--radius);padding:8px 14px;font-size:13px;display:inline-flex;align-items:center;gap:6px;}
+.btn-copy:hover{background:var(--surface);}
+#loginCard p{font-size:14px;color:var(--text-sec);line-height:1.5;margin-bottom:.75rem;}
+#mainApp{display:none;}
+#summaryArea{display:none;}
+@media(max-width:480px){.unit-grid,.cat-grid{grid-template-columns:1fr 1fr;gap:8px;}.rubrica{grid-template-columns:1fr;}.action-row{flex-direction:column;}.ext-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="app-header">
+    <h1>Desafíos de Literatura</h1>
+    <p>4.º Año NES · 2026 · Héroes y antihéroes: modelos de identidad</p>
+  </div>
+
+  <div class="card" id="loginCard">
+    <p>Ingresá tu nombre para guardar tu progreso automáticamente en este dispositivo.</p>
+    <input type="text" id="nameInput" placeholder="Nombre y apellido" />
+    <button class="btn-primary" onclick="startSession()">Empezar</button>
+  </div>
+
+  <div id="mainApp">
+    <div class="user-chip"><i class="ti ti-user" style="font-size:14px" aria-hidden="true"></i><span id="userLabel"></span></div>
+
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="practica" onclick="switchMode(this)">Práctica</button>
+      <button class="mode-tab" data-mode="extension" onclick="switchMode(this)">Nivel 3 — extensión</button>
+    </div>
+
+    <div id="modePractica">
+      <div id="stepUnidad">
+        <span class="label-sm">Paso 1 — elegí la unidad</span>
+        <div class="unit-grid">
+          <button class="unit-btn u1" data-unit="u1" onclick="selectUnit(this)">
+            <span class="un">Unidad 1</span>
+            <span class="ul">El héroe clásico</span>
+            <span class="ud">La Odisea · Mitos griegos</span>
+          </button>
+          <button class="unit-btn u2" data-unit="u2" onclick="selectUnit(this)">
+            <span class="un">Unidad 2</span>
+            <span class="ul">Héroes trágicos</span>
+            <span class="ud">Edipo · Medea · Macbeth</span>
+          </button>
+          <button class="unit-btn u3" data-unit="u3" onclick="selectUnit(this)">
+            <span class="un">Unidad 3</span>
+            <span class="ul">Héroe moderno</span>
+            <span class="ud">Camus · Unamuno · Don Juan Manuel</span>
+          </button>
+          <button class="unit-btn u4" data-unit="u4" onclick="selectUnit(this)">
+            <span class="un">Unidad 4</span>
+            <span class="ul">Heroínas y reescrituras</span>
+            <span class="ud">Atwood · Miller · Enriquez · Negroni</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="stepCategoria" style="display:none">
+        <button class="back-btn" onclick="goBackToUnits()"><i class="ti ti-arrow-left" aria-hidden="true"></i>Cambiar unidad</button>
+        <div id="unitLabel" style="margin-bottom:.75rem"></div>
+        <span class="label-sm">Paso 2 — elegí el tipo de desafío</span>
+        <div class="cat-grid">
+          <button class="cat-btn" data-cat="analisis" onclick="selectCat(this)">
+            <i class="ti ti-book-2 ci" aria-hidden="true"></i>
+            <span class="cl">Análisis literario</span>
+            <span class="cd">Comprensión crítica de fragmentos</span>
+          </button>
+          <button class="cat-btn" data-cat="heroe" onclick="selectCat(this)">
+            <i class="ti ti-shield-half ci" aria-hidden="true"></i>
+            <span class="cl">Héroe / antihéroe</span>
+            <span class="cd">Identificación y caracterización</span>
+          </button>
+          <button class="cat-btn" data-cat="ensayo" onclick="selectCat(this)">
+            <i class="ti ti-pencil ci" aria-hidden="true"></i>
+            <span class="cl">Escritura de ensayo</span>
+            <span class="cd">Hipótesis, argumentación y estructura</span>
+          </button>
+          <button class="cat-btn" data-cat="gramatica" onclick="selectCat(this)">
+            <i class="ti ti-grammar ci" aria-hidden="true"></i>
+            <span class="cl">Gramática y sintaxis</span>
+            <span class="cd">Subordinadas, puntuación, cohesión</span>
+          </button>
+        </div>
+        <div id="challengeArea"></div>
+      </div>
+    </div>
+
+    <div id="modeExtension" style="display:none">
+      <div class="ext-card">
+        <div class="ext-header">
+          <i class="ti ti-star" style="font-size:18px;color:var(--ext-tx)" aria-hidden="true"></i>
+          <span class="ext-badge">Nivel 3 — dominio</span>
+        </div>
+        <p class="ext-title">Fichero de extensión</p>
+        <p class="ext-desc">Desafíos de alta demanda para quienes alcanzaron el nivel de dominio. Elegí el tipo de tarjeta.</p>
+        <div class="ext-grid">
+          <div class="ext-item" onclick="showExtChallenge('comparada')">
+            <span class="ext-item-label"><i class="ti ti-arrows-exchange" aria-hidden="true" style="margin-right:4px"></i>Tarjeta azul</span>
+            <span class="ext-item-desc">Literatura comparada — héroe/antihéroe en narrativas del siglo XXI</span>
+          </div>
+          <div class="ext-item" onclick="showExtChallenge('transgesora')">
+            <span class="ext-item-label"><i class="ti ti-writing" aria-hidden="true" style="margin-right:4px"></i>Tarjeta roja</span>
+            <span class="ext-item-desc">Reescritura transgresora — restricciones sintácticas avanzadas</span>
+          </div>
+        </div>
+        <div id="extChallengeArea"></div>
+      </div>
+    </div>
+
+    <div id="summaryArea">
+      <div class="summary-card">
+        <div class="summary-title">Resumen de sesión <span class="badge" id="badgeCount"></span></div>
+        <div class="summary-pre" id="summaryText"></div>
+        <button class="btn-copy" onclick="copySummary()"><i class="ti ti-copy" style="font-size:16px" aria-hidden="true"></i>Copiar resumen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNITS = {
+  u1:{label:"Unidad 1 — El héroe clásico",obras:"La Odisea · Mitos griegos (Graves)"},
+  u2:{label:"Unidad 2 — Héroes trágicos",obras:"Edipo (Sófocles) · Medea (Eurípides) · Macbeth (Shakespeare)"},
+  u3:{label:"Unidad 3 — Héroe moderno",obras:"La peste (Camus) · San Manuel Bueno (Unamuno) · El Conde Lucanor (Don Juan Manuel)"},
+  u4:{label:"Unidad 4 — Heroínas y reescrituras",obras:"Penélope y las doce criadas (Atwood) · Circe (Miller) · Enriquez · Negroni"}
+};
+
+const CHALLENGES = {
+  u1:{
+    analisis:[
+      {obra:"La Odisea — Homero",titulo:"El regreso de Odiseo",dia:"mie",fragmento:"\"Soy Odiseo, hijo de Laertes, que por mis engaños soy conocido entre todos los hombres, y mi gloria llega hasta el cielo. Habito en la luminosa Ítaca.\"",consigna:"Analizá la presentación que hace Odiseo de sí mismo. ¿Qué rasgos del héroe épico aparecen en estas líneas? Identificá al menos <strong>dos características del héroe clásico según Campbell o Bowra</strong> y mostrálas en el fragmento.",pista:"El héroe clásico se define por su nombre, su linaje, su territorio y su fama (kléos). ¿Cuáles de estos elementos aparecen explícitamente en la presentación de Odiseo?",niveles:["Describe quién es Odiseo sin usar el marco teórico del héroe clásico.","Nombra una característica del héroe épico pero no la fundamenta con el fragmento.","Identifica dos o más rasgos del héroe clásico con citas textuales y marco teórico."]},
+      {obra:"Mitos griegos — Robert Graves",titulo:"El héroe y la prueba",dia:"mie",fragmento:"\"El héroe debe descender al mundo subterráneo, enfrentarse a las fuerzas de la muerte y regresar transformado. No es el mismo que partió; la prueba lo ha rehecho.\"",consigna:"¿Qué función cumple la 'prueba' en la estructura del héroe según Campbell? Analizá cómo este fragmento de Graves ilustra el 'viaje del héroe'. Identificá las tres etapas del monomito y explicá qué transforma al personaje.",pista:"Campbell describe tres fases: partida, iniciación y retorno. La transformación del héroe no es física sino identitaria. ¿Qué muere y qué nace en ese descenso?",niveles:["Cuenta la historia sin vincularla con las etapas de Campbell.","Menciona las etapas pero no explica qué transforma al héroe.","Identifica las tres etapas, las vincula al fragmento y analiza la transformación identitaria."]}
+    ],
+    heroe:[
+      {obra:"La Odisea — Homero",titulo:"Odiseo: ¿héroe o antihéroe?",dia:"mie",fragmento:"\"La diosa Atenea le inspiró en el ánimo el engaño, la astucia, la mentira. Odiseo era amado por los dioses precisamente porque sabía mentir mejor que ningún otro mortal.\"",consigna:"A partir del fragmento, debatí: ¿Odiseo es un héroe o un antihéroe? Usá los criterios de Bowra y Campbell para fundamentar tu posición. ¿Puede ser héroe alguien cuya virtud principal es el engaño?",pista:"Bowra distingue el héroe por la excelencia (areté). En el mundo épico griego, la astucia (métis) es una forma de excelencia, no un defecto moral. ¿Cómo cambia eso el análisis?",niveles:["Opina que Odiseo 'es bueno o malo' sin usar el marco teórico.","Usa la categoría héroe/antihéroe pero no debate la paradoja del engaño.","Analiza la paradoja de la métis como virtud épica con marco teórico y citas."]},
+      {obra:"La Odisea — Homero",titulo:"El héroe y su kléos",dia:"mie",fragmento:"\"Preferiría ser labrador en tierra ajena, al servicio de un hombre sin recursos, antes que reinar sobre todos los muertos.\"",consigna:"Odiseo, en el Hades, le dice esto a Aquiles. Analizá qué revela este fragmento sobre la concepción del héroe clásico y su relación con la fama y la muerte. ¿Qué valora más Odiseo: la gloria póstuma o la vida?",pista:"El kléos (gloria) es para el héroe épico casi más importante que la vida. Pero Odiseo aquí elige la vida. ¿Es eso una traición al código heroico o una complejización del mismo?",niveles:["Resume lo que dice Odiseo sin analizar sus implicancias.","Identifica el valor de la vida sobre la gloria pero no lo vincula con el código heroico épico.","Analiza la tensión entre kléos y nóstos (regreso) como complejización del héroe clásico."]}
+    ],
+    ensayo:[
+      {obra:"La Odisea / Mitos griegos",titulo:"Formulá una tesis sobre el héroe clásico",dia:"mie",fragmento:"Tema: La astucia como virtud heroica en la épica griega.",consigna:"Escribí una sola oración de tesis que tome posición sobre este tema. Debe ser debatible, no descriptiva. Luego planteá tres argumentos y una contraargumentación.",pista:"Tesis débil: 'En la épica griega la astucia es importante'. Tesis fuerte: 'La astucia de Odiseo redefine la heroicidad épica al demostrar que la métis supera a la fuerza como virtud fundacional del héroe griego'.",niveles:["Escribe una opinión sin tesis académica.","Formula una tesis pero es descriptiva o incontestable.","Tesis debatible, tres argumentos con citas y contraargumentación sólida."]},
+      {obra:"La Odisea — Homero",titulo:"La introducción del ensayo",dia:"mie",fragmento:"Tema: El viaje de Odiseo como modelo del monomito de Campbell.",consigna:"Redactá <strong>solo la introducción</strong> (3 a 5 oraciones): presentación de la obra y el marco teórico, planteamiento del problema e hipótesis. Prohibido usar 'yo creo'. Usá al menos una subordinada adjetiva.",pista:"La introducción no argumenta: instala el problema y propone una respuesta tentativa. ¿Qué pregunta interesante podés hacerle al texto que no se responda con un simple sí o no?",niveles:["Empieza con 'Este ensayo trata sobre...' sin hipótesis.","Presenta la obra y el marco pero sin hipótesis debatible.","Introduce obra y marco, plantea el problema y formula hipótesis con subordinada adjetiva."]}
+    ],
+    gramatica:[
+      {obra:"La Odisea — Homero",titulo:"Subordinadas adjetivas en el texto épico",dia:"jue",fragmento:"\"El héroe llegó a su tierra. La tierra era Ítaca. El héroe había viajado veinte años. Los dioses habían obstaculizado el viaje.\"",consigna:"Reescribí las cuatro oraciones uniéndolas con pronombres relativos (que, cuyo, quien, cual) para formar <strong>dos oraciones complejas</strong>. No podés agregar información nueva.",pista:"Podés empezar: 'El héroe que había viajado veinte años llegó a Ítaca, cuyo regreso los dioses...' Atención con 'cuyo': concuerda con el sustantivo que le sigue.",niveles:["Une con 'y' o 'pero' sin usar relativos.","Usa 'que' pero no intenta 'cuyo' o 'quien'.","Dos oraciones complejas con al menos dos relativos distintos y concordancia perfecta."]},
+      {obra:"Mitos griegos — Graves",titulo:"Cohesión: sinónimos y pronombres",dia:"jue",fragmento:"\"El héroe entró al laberinto. El héroe buscaba al monstruo. El monstruo vivía en el centro del laberinto. El monstruo devoraba a los jóvenes.\"",consigna:"Reescribí el párrafo eliminando repeticiones con: (a) pronombres, (b) sinónimos o hiperónimos, (c) elipsis. Mantené exactamente la misma información.",pista:"'El monstruo' puede ser 'la bestia', 'la criatura', 'él'. 'El héroe' puede ser 'el joven', 'el guerrero'. La elipsis también es válida: a veces no poner sujeto es más elegante.",niveles:["Elimina algunas repeticiones pero genera ambigüedad.","Usa pronombres y un sinónimo pero el texto queda fragmentado.","Texto cohesivo con los tres mecanismos y referencia clara."]}
+    ]
+  },
+  u2:{
+    analisis:[
+      {obra:"Edipo Rey — Sófocles",titulo:"La anagnórisis de Edipo",dia:"mie",fragmento:"\"¡Ay, ay! Todo se ha cumplido. Todo es verdad. Oh luz del sol, que te vea yo ahora por última vez, yo que nací de quienes no debía, me uní a quien no debía y maté a quien no debía.\"",consigna:"Este es el momento de reconocimiento (anagnórisis) de Edipo. Analizá: ¿qué función cumple este recurso en la tragedia griega? ¿Cómo construye Sófocles la caída del héroe trágico? Identificá la hamartía de Edipo.",pista:"La hamartía es el error trágico del héroe, no necesariamente un defecto moral. Aristóteles dice que la anagnórisis produce catarsis en el espectador. ¿Qué reconoce Edipo y qué reconocemos nosotros con él?",niveles:["Resume lo que pasa sin usar los conceptos de la tragedia griega.","Menciona la anagnórisis pero no la vincula con la estructura trágica ni con la hamartía.","Analiza anagnórisis, hamartía y catarsis con citas textuales y marco teórico aristotélico."]},
+      {obra:"Macbeth — Shakespeare",titulo:"El héroe trágico shakespeariano",dia:"mie",fragmento:"\"Mañana, y mañana, y mañana se arrastra con este paso mezquino día a día hasta la última sílaba del tiempo registrado; y todos nuestros ayeres han iluminado a los necios el camino hacia la polvorienta muerte.\"",consigna:"Analizá el monólogo de Macbeth. ¿Qué rasgos del héroe trágico shakespeariano aparecen aquí? ¿Cómo se diferencia este héroe del héroe trágico griego? Identificá al menos dos recursos retóricos.",pista:"Shakespeare hereda la estructura trágica griega pero la modifica: su héroe tiene mayor profundidad psicológica, conciencia de su caída y responsabilidad moral. ¿Edipo sabía lo que hacía? ¿Macbeth?",niveles:["Describe el estado de ánimo de Macbeth sin analizar la estructura trágica.","Identifica el tono desesperado pero no lo vincula con el héroe trágico ni lo compara con el griego.","Analiza el monólogo con recursos retóricos, vincula con el héroe shakespeariano y contrasta con el griego."]}
+    ],
+    heroe:[
+      {obra:"Medea — Eurípides",titulo:"Medea: ¿víctima o monstruo?",dia:"mie",fragmento:"\"Sé bien qué crímenes voy a cometer, pero mi cólera es más fuerte que mi razón, cólera que es causa de los mayores males entre los mortales.\"",consigna:"Medea reconoce que va a cometer un crimen y aun así lo comete. ¿Es Medea un héroe trágico, un antihéroe o ninguno de los dos? Usá los criterios del héroe trágico griego (hamartía, hybris, némesis) y tomá una posición fundamentada.",pista:"La hybris es el exceso que desafía el orden divino y humano. ¿La cólera de Medea es hybris o es la respuesta justa de alguien traicionada? Esa tensión es el corazón de la obra.",niveles:["Dice que Medea 'es mala' sin usar el marco teórico.","Usa hamartía o hybris pero no desarrolla la ambigüedad moral del personaje.","Analiza la tensión víctima/monstruo con los tres conceptos y toma posición fundamentada."]},
+      {obra:"Edipo / Macbeth",titulo:"El héroe que cae: comparación",dia:"mie",fragmento:"Edipo: \"Soy yo quien he lanzado estas maldiciones sobre mí mismo sin saberlo.\"\nMacbeth: \"He cometido tantos crímenes que volver atrás sería tan difícil como seguir adelante.\"",consigna:"Compará la caída de Edipo y la de Macbeth. ¿Cuál es la diferencia central entre ambos héroes trágicos en términos de consciencia y responsabilidad moral? ¿Cuál te parece más trágico y por qué?",pista:"La diferencia clave está en el conocimiento: Edipo actúa sin saber, Macbeth actúa sabiendo. ¿Cambia eso la culpa? ¿Cambia la tragedia?",niveles:["Describe uno y luego el otro sin establecer comparación.","Identifica la diferencia de conocimiento pero no analiza sus implicancias éticas.","Construye una tesis comparativa sobre consciencia y culpa con citas de ambos textos."]}
+    ],
+    ensayo:[
+      {obra:"Edipo Rey — Sófocles",titulo:"Tesis sobre el destino y la libertad",dia:"mie",fragmento:"Tema: El destino en la tragedia griega: ¿los héroes tienen libre albedrío?",consigna:"Formulá una tesis debatible sobre este tema. Luego planteá tres argumentos y una contraargumentación usando el texto de Edipo.",pista:"Tesis débil: 'En Edipo el destino es importante'. Tesis fuerte: 'La tragedia de Edipo demuestra que el destino no elimina la libertad humana sino que la hace más dolorosa, porque Edipo elige constantemente sin poder escapar de lo que ya está escrito'.",niveles:["Escribe opinión sin tesis académica.","Tesis descriptiva o no debatible.","Tesis debatible con tres argumentos textuales y contraargumentación."]},
+      {obra:"Medea / Macbeth",titulo:"Párrafo de contraargumentación",dia:"jue",fragmento:"Tesis: 'Los héroes trágicos shakespearianos son moralmente superiores a los griegos porque actúan con plena consciencia de sus actos.'",consigna:"Escribí un párrafo de <strong>contraargumentación</strong>: presentá el argumento contrario más fuerte y luego refutalo con conectores de concesión (si bien, aunque) y de refutación (sin embargo, no obstante).",pista:"El mejor argumento contrario podría ser que la consciencia de Macbeth no lo hace superior sino más culpable. O que Medea tiene una consciencia igual de lúcida. Elegí el contraargumento más incómodo.",niveles:["Escribe solo a favor de la tesis sin contraargumentar.","Presenta una objeción débil y la refuta con solo 'pero'.","Objeción sólida refutada con conectores de concesión y argumentos textuales."]}
+    ],
+    gramatica:[
+      {obra:"Edipo Rey — Sófocles",titulo:"Puntuación avanzada en el monólogo trágico",dia:"jue",fragmento:"\"Edipo comprendió la verdad la verdad que había huido toda su vida la verdad que los dioses habían escondido la verdad que ahora lo aplastaba como una roca.\"",consigna:"El fragmento está sin puntuación. Reescribilo usando al menos un <strong>punto y coma</strong> y una <strong>raya</strong> (—). Explicá en una línea por qué elegiste cada signo.",pista:"La raya puede introducir la aclaración que define 'la verdad'. El punto y coma puede separar las distintas verdades que se acumulan. La puntuación aquí es ritmo: afecta la velocidad de la caída.",niveles:["Usa solo comas y puntos sin rayas ni punto y coma.","Usa los signos pero no explica su función.","Puntúa correctamente y justifica cada signo con su función gramatical y efecto de sentido."]},
+      {obra:"Macbeth — Shakespeare",titulo:"Oraciones subordinadas: el monólogo",dia:"jue",fragmento:"\"Lady Macbeth entró al cuarto. El cuarto estaba oscuro. Macbeth esperaba. Macbeth sostenía un puñal. El puñal brillaba en la oscuridad.\"",consigna:"Reescribí las cinco oraciones uniéndolas con pronombres relativos para formar <strong>dos oraciones complejas</strong> con subordinadas adjetivas. No podés agregar información nueva.",pista:"Podés empezar uniendo las primeras dos: 'Lady Macbeth entró al cuarto, que estaba oscuro...' Luego buscá cómo unir las tres restantes usando 'quien', 'cuyo' o 'el cual'.",niveles:["Une con 'y' sin relativos.","Usa 'que' correctamente pero no intenta otras formas.","Dos oraciones con al menos dos relativos distintos y concordancia perfecta."]}
+    ]
+  },
+  u3:{
+    analisis:[
+      {obra:"La peste — Albert Camus",titulo:"El silencio de Rieux",dia:"mie",fragmento:"\"Rieux decidió entonces redactar el relato que aquí termina, para no ser de los que callan, para testimoniar a favor de los apestados, para dejar por lo menos un recuerdo de la injusticia y de la violencia que les había sido hecha.\"",consigna:"Leé el fragmento. ¿Por qué el narrador elige hablar cuando podría callar? Identificá al menos <strong>dos recursos narrativos</strong> (voz, tiempo verbal, punto de vista) y explicá qué efecto producen.",pista:"Prestá atención al verbo 'decidió' y al uso de 'aquí': ¿quién habla, desde dónde, para qué? El testimonio como acto ético es clave en el existencialismo.",niveles:["Resume lo que dice Rieux sin analizar el cómo.","Identifica un recurso pero no lo vincula con el sentido.","Vincula voz narrativa, contexto histórico y ética del testimonio con citas."]},
+      {obra:"San Manuel Bueno, mártir — Unamuno",titulo:"La fe fingida",dia:"mie",fragmento:"\"¿Verdad? ¿Qué es la verdad? —me dijo—. La verdad, Lázaro, es acaso algo terrible, algo intolerable, algo mortal; la gente sencilla no podría vivir con ella.\"",consigna:"Analizá la posición de San Manuel ante la verdad y la fe. ¿Qué tipo de héroe construye Unamuno? ¿Cómo se diferencia de los héroes anteriores? Identificá el conflicto central del personaje.",pista:"San Manuel sabe que no cree, pero predica la fe para que otros puedan vivir. ¿Es eso heroísmo, hipocresía o sacrificio? ¿Qué tiene en común con el 'héroe cotidiano' de Camus?",niveles:["Resume la historia sin analizar el conflicto filosófico.","Identifica la duda de San Manuel pero no la vincula con el concepto de héroe moderno.","Analiza el conflicto fe/verdad y lo vincula con la figura del héroe moderno que se sacrifica."]},
+      {obra:"El Conde Lucanor — Don Juan Manuel",titulo:"La moraleja como estructura",dia:"mie",fragmento:"\"Y el ejemplo que dio don Patronio al conde fue éste: que se guardara de los aduladores, que siempre dicen lo que el señor quiere oír, no lo que le conviene.\"",consigna:"Analizá la estructura del 'enxiemplo' en El Conde Lucanor. ¿Qué función cumple la figura del consejero (Patronio) en relación con el héroe? ¿Cómo aparece la sabiduría como virtud heroica en este texto medieval?",pista:"El Conde Lucanor es una obra didáctica: el héroe no actúa por fuerza sino por sabiduría. Patronio es el mentor, una figura clave en el monomito de Campbell. ¿Qué tipo de heroísmo propone Don Juan Manuel?",niveles:["Resume el cuento sin analizar la estructura ni la figura del consejero.","Identifica el rol de Patronio pero no lo vincula con el concepto de héroe ni con el contexto medieval.","Analiza la sabiduría como virtud heroica medieval y vincula la estructura con el monomito."]}
+    ],
+    heroe:[
+      {obra:"La peste — Albert Camus",titulo:"Rieux: héroe cotidiano",dia:"mie",fragmento:"\"El doctor Rieux decidió no llamarse a sí mismo héroe. Simplemente hacía lo que había que hacer, y pensaba que no había otra manera de responder a la peste.\"",consigna:"¿Rieux encaja en la categoría de héroe moderno? Justificá con al menos <strong>tres rasgos específicos</strong> del personaje. Compará con el héroe clásico de la Unidad 1 y el héroe trágico de la Unidad 2.",pista:"El héroe moderno no busca gloria ni fama. Actúa por imperativo ético, no por kléos. ¿Qué rasgos conserva del héroe clásico y cuáles abandona?",niveles:["Dice 'Rieux es bueno' sin marco teórico ni comparación.","Usa la categoría héroe moderno pero sin comparar con unidades anteriores.","Tres rasgos del héroe moderno con citas, comparación con héroe clásico y trágico."]},
+      {obra:"San Manuel / La peste",titulo:"El héroe que duda: comparación",dia:"mie",fragmento:"\"San Manuel oraba en voz alta, pero en silencio no creía. Rieux curaba sin esperar milagros, sabiendo que la muerte ganaría al final.\"",consigna:"Compará a San Manuel y al doctor Rieux como héroes modernos. ¿Qué tienen en común? ¿Cuál de los dos representa mejor el modelo de héroe moderno según lo trabajado en clase?",pista:"Ambos actúan sabiendo que su lucha puede ser inútil. Eso los une con el absurdo de Camus: el héroe moderno actúa igual. ¿Cuál de los dos lo encarna de manera más pura?",niveles:["Describe uno y luego el otro sin comparar.","Identifica una similitud pero no toma posición ni usa marco teórico.","Construye tesis comparativa, vincula con el absurdo existencialista y toma posición fundamentada."]}
+    ],
+    ensayo:[
+      {obra:"La peste — Camus",titulo:"Tesis: el silencio como complicidad",dia:"mie",fragmento:"Tema: El silencio como complicidad en 'La peste'.",consigna:"Escribí una sola oración de tesis debatible. Luego enumerá tres argumentos y una contraargumentación.",pista:"Tesis fuerte: 'El silencio de los habitantes de Orán no es ignorancia sino una elección que los convierte en cómplices del absurdo'. ¿Podés mejorarla o refutarla?",niveles:["Opinión personal sin tesis académica.","Tesis descriptiva o no debatible.","Tesis debatible con tres argumentos textuales y contraargumentación."]},
+      {obra:"San Manuel / La peste",titulo:"Introducción del ensayo comparativo",dia:"mie",fragmento:"Tu ensayo debe comparar la figura del héroe en Camus y en Unamuno.",consigna:"Redactá <strong>solo la introducción</strong> (3 a 5 oraciones): presentación de las obras, planteamiento del problema e hipótesis. Prohibido usar 'yo creo'. Usá al menos una subordinada adjetiva.",pista:"Introducción ≠ argumentación. Instalá la pregunta y tu respuesta tentativa. ¿Qué pregunta interesante surge al cruzar estos dos textos?",niveles:["'Este ensayo trata sobre...' sin hipótesis.","Presenta obras pero sin hipótesis debatible.","Introduce obras, plantea problema, formula hipótesis con subordinada adjetiva."]}
+    ],
+    gramatica:[
+      {obra:"La peste — Camus",titulo:"Subordinadas adjetivas: Rieux y Orán",dia:"jue",fragmento:"\"El médico llegó tarde. El médico era Rieux. La ciudad estaba silenciosa. La ciudad había sido atacada por la epidemia.\"",consigna:"Reescribí las cuatro oraciones con pronombres relativos (que, cuyo, quien, cual) para formar <strong>dos oraciones complejas</strong>. No podés agregar información nueva.",pista:"'El médico que llegó tarde era Rieux.' ¿Podés usar 'cuyo' o 'en quien'? 'cuyo' concuerda con el sustantivo que le sigue.",niveles:["Une con 'y' sin relativos.","Usa 'que' pero no intenta otras formas.","Dos oraciones con al menos dos relativos distintos y concordancia perfecta."]},
+      {obra:"La peste — Camus",titulo:"Cohesión: eliminá las repeticiones",dia:"jue",fragmento:"\"Rieux vio la rata. La rata estaba muerta. Rieux no le dio importancia a la rata. Rieux siguió caminando. La rata era la primera de muchas ratas.\"",consigna:"Reescribí el párrafo eliminando repeticiones con: (a) pronombres, (b) sinónimos o hiperónimos, (c) elipsis. Mantené exactamente la misma información.",pista:"Hiperónimo de 'rata': 'el roedor', 'el animal'. La elipsis a veces funciona mejor que el pronombre. Buscá el equilibrio.",niveles:["Elimina algunas repeticiones pero genera ambigüedad.","Usa pronombres y un sinónimo pero el texto queda fragmentado.","Texto cohesivo con los tres mecanismos y referencia clara."]}
+    ]
+  },
+  u4:{
+    analisis:[
+      {obra:"Penélope y las doce criadas — Atwood",titulo:"La voz silenciada",dia:"mie",fragmento:"\"Ustedes querrán saber por qué fui tan paciente. Se lo diré: no tenía alternativa. O eso creía entonces. Ahora pienso que siempre hay alternativas; simplemente no siempre son visibles.\"",consigna:"Analizá la voz narrativa de Penélope en este fragmento de Atwood. ¿Qué operación literaria realiza la autora al darle la palabra a Penélope? ¿Cómo construye una perspectiva diferente a la de la Odisea?",pista:"Atwood hace hablar a quien en Homero no habla. ¿Qué cambia cuando el silenciado toma la palabra? Pensá en la diferencia entre el punto de vista épico masculino y la perspectiva femenina retrospectiva.",niveles:["Resume lo que dice Penélope sin analizar la operación narrativa de Atwood.","Identifica el cambio de perspectiva pero no analiza qué implica literaria o ideológicamente.","Analiza la reescritura como operación crítica: voz, género y subversión del modelo épico."]},
+      {obra:"Circe — Madeline Miller",titulo:"La bruja como heroína",dia:"mie",fragmento:"\"Descubrí que tenía un poder. No era el poder de los dioses olímpicos, brillante y arrollador. Era otro poder: paciente, acumulado, aprendido en la soledad y el fracaso.\"",consigna:"¿Qué modelo de heroína construye Miller a través de Circe? Analizá cómo el poder de Circe se diferencia del poder heroico clásico. ¿Qué rasgos la acercan al héroe moderno?",pista:"El poder de Circe no es innato ni glorioso: es aprendido, trabajado, solitario. ¿Eso lo acerca más al héroe moderno (Rieux, San Manuel) que al héroe clásico (Odiseo, Aquiles)?",niveles:["Describe el poder de Circe sin compararlo con otros modelos heroicos.","Identifica la diferencia con el héroe clásico pero no vincula con el héroe moderno.","Analiza el modelo de heroína de Miller comparándolo con el héroe clásico y el moderno."]},
+      {obra:"Las cosas que perdimos — Enriquez",titulo:"La casa como personaje",dia:"mie",fragmento:"\"La casa estaba viva. No de manera metafórica: la casa respiraba, sudaba por sus paredes húmedas, crujía cuando alguien la miraba demasiado fijo.\"",consigna:"Analizá la operación retórica de Enriquez: afirma que la casa 'estaba viva' y luego niega que sea metáfora. ¿Qué figura construye? ¿Qué efecto produce en el género del texto? Usá al menos un concepto de teoría literaria.",pista:"La autora juega con las expectativas del lector sobre lo real. ¿Personificación, animismo narrativo o realismo mágico? ¿Cómo funciona la negación de la metáfora como operación literaria?",niveles:["Describe lo que pasa sin identificar figuras.","Nombra la personificación pero no explica la negación de la metáfora.","Analiza la paradoja retórica y la vincula con el género terror/fantástico."]}
+    ],
+    heroe:[
+      {obra:"Penélope / Circe — Atwood / Miller",titulo:"La heroína que reescribe",dia:"mie",fragmento:"Penélope: \"Fui fiel. Y fui olvidada.\"\nCirce: \"Aprendí a usar mi poder cuando entendí que nadie vendría a salvarme.\"",consigna:"Compará los modelos de heroína en Atwood y Miller. ¿Qué tienen en común? ¿Cómo cada autora reescribe la figura femenina clásica? ¿Qué crítica realizan al modelo heroico tradicional?",pista:"Ambas toman personajes secundarios del mundo clásico y los convierten en protagonistas. ¿Qué dice eso sobre quién tiene derecho a ser héroe en la literatura?",niveles:["Describe una y luego la otra sin comparar.","Identifica una similitud pero no analiza la operación de reescritura.","Construye tesis comparativa sobre reescritura y crítica al modelo heroico clásico con citas de ambos textos."]},
+      {obra:"Las cosas que perdimos — Enriquez",titulo:"La heroína que no salva",dia:"mie",fragmento:"\"Ella sabía que no podía rescatarla. No tenía los instrumentos para eso. Solo podía quedarse, mirar, y escribir después lo que había visto.\"",consigna:"¿Cómo construye Enriquez un modelo de heroína femenina en este fragmento? Compará con el héroe activo clásico. ¿Qué dice esta elección sobre la perspectiva de género en la narrativa de la autora?",pista:"'Quedarse y mirar' puede ser impotencia o resistencia activa. ¿Cuál es la diferencia entre pasividad y presencia? ¿Escribir puede ser un acto heroico?",niveles:["Dice que la protagonista 'no es heroína porque no hace nada'.","Identifica el contraste con el héroe activo pero no aborda el género.","Analiza la resistencia como heroísmo alternativo y la vincula con los estudios de género."]}
+    ],
+    ensayo:[
+      {obra:"Atwood / Enriquez",titulo:"Tesis sobre las heroínas y la reescritura",dia:"mie",fragmento:"Tema: La reescritura femenina como acto político en Atwood y Enriquez.",consigna:"Formulá una tesis debatible sobre este tema. Luego planteá tres argumentos y una contraargumentación.",pista:"Tesis fuerte: 'Las reescrituras de Atwood y Enriquez no son meras variaciones del canon sino actos de recuperación política que devuelven agencia a las figuras femeninas silenciadas por la épica patriarcal'.",niveles:["Opinión sin tesis académica.","Tesis descriptiva o no debatible.","Tesis debatible con tres argumentos textuales y contraargumentación."]},
+      {obra:"Circe / Penélope / Enriquez",titulo:"Párrafo de contraargumentación",dia:"jue",fragmento:"Tesis: 'Las protagonistas de Enriquez y Atwood representan modelos de resistencia más efectivos que los héroes clásicos.'",consigna:"Escribí un párrafo de <strong>contraargumentación</strong>: el argumento contrario más fuerte y luego refutalo con conectores de concesión (si bien, aunque) y de refutación (sin embargo, no obstante).",pista:"El mejor contraargumento: que la resistencia de estas heroínas no cambia nada, que siguen siendo víctimas del sistema que critican. ¿Podés refutar eso con el texto?",niveles:["Escribe solo a favor sin contraargumentar.","Objeción débil refutada con solo 'pero'.","Objeción sólida refutada con conectores de concesión y argumentos textuales."]}
+    ],
+    gramatica:[
+      {obra:"Las cosas que perdimos — Enriquez",titulo:"Puntuación avanzada: punto y coma y rayas",dia:"jue",fragmento:"\"Ella no tenía miedo de la casa tenía miedo de lo que la casa recordaba la casa guardaba secretos viejos secretos que nadie quería nombrar pero que todos habían vivido.\"",consigna:"El fragmento está sin puntuación. Reescribilo usando al menos un <strong>punto y coma</strong> y una <strong>raya</strong> (—). Explicá en una línea por qué elegiste cada signo.",pista:"El punto y coma separa ideas relacionadas pero autónomas. La raya introduce una aclaración. No las intercambies.",niveles:["Solo comas y puntos, sin rayas ni punto y coma.","Usa los signos pero no explica la función de cada uno.","Puntúa correctamente y justifica cada signo con su función gramatical."]},
+      {obra:"Penélope y las doce criadas — Atwood",titulo:"Subordinadas adjetivas en la reescritura",dia:"jue",fragmento:"\"La mujer esperó al hombre. El hombre era su esposo. El hombre había viajado lejos. El viaje había durado veinte años.\"",consigna:"Reescribí las cuatro oraciones con pronombres relativos (que, cuyo, quien, cual) para formar <strong>dos oraciones complejas</strong>. No podés agregar información nueva.",pista:"'La mujer esperó al hombre que era su esposo...' ¿Podés usar 'cuyo viaje' para incorporar la cuarta oración? Recordá que 'cuyo' concuerda con el sustantivo que le sigue.",niveles:["Une con 'y' sin relativos.","Usa 'que' pero no intenta 'cuyo' u otras formas.","Dos oraciones con al menos dos relativos distintos y concordancia perfecta."]}
+    ]
+  }
+};
+
+const EXT={
+  comparada:[
+    {titulo:"El héroe en el siglo XXI",consigna:"Elegí una película, serie o canción actual cuyo protagonista pueda clasificarse como héroe moderno o antihéroe según los criterios trabajados en clase. Justificá la clasificación con al menos dos rasgos comparativos concretos entre el texto literario y la obra elegida. No alcanza con decir 'son parecidos': necesitás citar el texto y describir la obra.",pista:"Pensá en personajes que actúan sin esperar reconocimiento, que resisten sin poder 'salvar' la situación. ¿Breaking Bad, Succession, Fleabag, La Casa de Papel?"},
+    {titulo:"El absurdo fuera de la literatura",consigna:"Identificá una situación del mundo actual que pueda leerse como una manifestación del absurdo existencialista de Camus. Desarrollá el paralelo con al menos dos argumentos que crucen el texto literario con la situación elegida.",pista:"El absurdo no es lo raro o cómico: es la tensión entre el deseo humano de sentido y el silencio del mundo. ¿Dónde ves eso hoy?"},
+    {titulo:"Heroína del siglo XXI",consigna:"Elegí una figura femenina de la cultura actual (personaje de ficción, figura histórica reciente, referente cultural) y analizála usando los modelos de heroína trabajados con Atwood, Miller y Enriquez. ¿Reescribe el canon? ¿Resiste sin salvar? ¿Aprende su poder en soledad?",pista:"No es necesario que sea perfecta ni que gane. Las heroínas de estas autoras no ganan siempre. ¿Qué hace que sea una heroína según estos nuevos modelos?"}
+  ],
+  transgesora:[
+    {titulo:"La voz del antagonista",consigna:"Reescribí un pasaje de cualquiera de las obras del programa desde el punto de vista de un personaje secundario o antagonista que en el original no tiene voz. Restricciones obligatorias: (a) usá al menos tres pronombres relativos distintos (que, cuyo, quien, cual), (b) eliminá todos los adjetivos calificativos — reemplazalos por construcciones sustantivas o verbales, (c) usá al menos una raya y un punto y coma.",pista:"'Eliminar adjetivos' no empobrece el texto: obliga a ser más preciso. En lugar de 'la noche oscura' podés escribir 'la noche que no dejaba ver'. El desafío es de precisión."},
+    {titulo:"El mismo texto, otra sintaxis",consigna:"Tomá el siguiente fragmento y reescribilo dos veces: (1) usando solo oraciones simples de máximo 8 palabras, y (2) uniéndolo todo en una sola oración compleja con subordinadas. Fragmento: 'La mujer miró la casa. La casa guardaba secretos. Ella lo sabía desde siempre. Nunca preguntó nada. Eso también era una forma de saber.' Reflexionás al final: ¿qué cambia en el efecto de sentido según la sintaxis elegida?",pista:"La sintaxis no es solo gramática: es ritmo, tensión y punto de vista. Una oración larga produce un efecto muy diferente a cinco oraciones breves. ¿Cuál es más efectiva para el género?"}
+  ]
+};
+
+const catLabels={analisis:"Análisis literario",heroe:"Héroe / antihéroe",ensayo:"Escritura de ensayo",gramatica:"Gramática y sintaxis"};
+let userName="",currentUnit=null,currentCat=null,currentIndex=null,hintVisible=false,log=[],currentMode="practica",saveTimer=null;
+
+function startSession(){
+  const n=document.getElementById("nameInput").value.trim();
+  if(!n){document.getElementById("nameInput").focus();return;}
+  userName=n;
+  localStorage.setItem("lit_user",n);
+  document.getElementById("loginCard").style.display="none";
+  document.getElementById("mainApp").style.display="block";
+  document.getElementById("userLabel").textContent=userName;
+  loadLog();
+}
+document.getElementById("nameInput").addEventListener("keydown",function(e){if(e.key==="Enter")startSession();});
+window.addEventListener("load",function(){
+  const s=localStorage.getItem("lit_user");
+  if(s)document.getElementById("nameInput").value=s;
+});
+
+function switchMode(btn){
+  document.querySelectorAll(".mode-tab").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  currentMode=btn.dataset.mode;
+  document.getElementById("modePractica").style.display=currentMode==="practica"?"block":"none";
+  document.getElementById("modeExtension").style.display=currentMode==="extension"?"block":"none";
+}
+
+function selectUnit(btn){
+  document.querySelectorAll(".unit-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  currentUnit=btn.dataset.unit;
+  currentCat=null;
+  currentIndex=null;
+  document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById("challengeArea").innerHTML="";
+  document.getElementById("stepUnidad").style.display="none";
+  document.getElementById("stepCategoria").style.display="block";
+  const u=UNITS[currentUnit];
+  document.getElementById("unitLabel").innerHTML=`<span style="font-size:13px;font-weight:500;color:var(--text-muted)">${u.label}</span><br><span style="font-size:12px;color:var(--text-muted)">${u.obras}</span>`;
+}
+
+function goBackToUnits(){
+  saveCurrentResponse();
+  document.getElementById("stepUnidad").style.display="block";
+  document.getElementById("stepCategoria").style.display="none";
+  document.getElementById("challengeArea").innerHTML="";
+  currentCat=null;currentIndex=null;hintVisible=false;
+  document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
+}
+
+function selectCat(btn){
+  document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  currentCat=btn.dataset.cat;
+  hintVisible=false;
+  showChallenge();
+}
+
+function showChallenge(forceNew){
+  if(!currentUnit||!currentCat)return;
+  saveCurrentResponse();
+  const pool=CHALLENGES[currentUnit][currentCat];
+  if(!pool||pool.length===0){
+    document.getElementById("challengeArea").innerHTML=`<div class="card"><p style="color:var(--text-muted);font-size:14px">No hay desafíos disponibles para esta combinación todavía.</p></div>`;
+    return;
+  }
+  let idx=currentIndex;
+  if(forceNew||idx===null){
+    let newIdx;
+    do{newIdx=Math.floor(Math.random()*pool.length);}while(pool.length>1&&newIdx===idx);
+    idx=newIdx;
+  }
+  currentIndex=idx;
+  hintVisible=false;
+  const c=pool[idx];
+  const storageKey="lit_"+userName+"_"+currentUnit+"_"+currentCat+"_"+idx;
+  const savedDraft=localStorage.getItem(storageKey)||"";
+  const diaLabel=c.dia==="mie"?"Miércoles — borrador":"Jueves — edición";
+  const diaClass=c.dia==="mie"?"tag-mie":"tag-jue";
+  const notice=savedDraft?`<div class="borrador-notice"><i class="ti ti-device-floppy" aria-hidden="true"></i>Tenés un borrador guardado. Podés editarlo acá.</div>`:"";
+  document.getElementById("challengeArea").innerHTML=`
+    <div class="card">
+      <div class="ch-header">
+        <span class="tag tag-cat">${catLabels[currentCat]}</span>
+        <span class="tag tag-obra">${c.obra}</span>
+        <span class="tag-dia ${diaClass}">${diaLabel}</span>
+      </div>
+      <p class="ch-title">${c.titulo}</p>
+      <div class="frag">${c.fragmento}</div>
+      <p class="consigna">${c.consigna}</p>
+      ${notice}
+      <p class="resp-label">Tu respuesta:</p>
+      <textarea id="respInput" placeholder="Escribí tu análisis acá...">${savedDraft}</textarea>
+      <p class="save-indicator" id="saveIndicator">El texto se guarda automáticamente.</p>
+      <div id="hintArea"></div>
+      <div class="rubrica">
+        <div class="niv n1"><span>Nivel 1 — inicial</span>${c.niveles[0]}</div>
+        <div class="niv n2"><span>Nivel 2 — en desarrollo</span>${c.niveles[1]}</div>
+        <div class="niv n3"><span>Nivel 3 — dominio</span>${c.niveles[2]}</div>
+      </div>
+      <div class="action-row">
+        <button class="btn-hint" onclick="toggleHint()"><i class="ti ti-bulb" aria-hidden="true" style="font-size:16px"></i>Ver pista del docente</button>
+        <button class="btn-outline" onclick="showChallenge(true)"><i class="ti ti-refresh" aria-hidden="true" style="font-size:16px"></i>Otro desafío</button>
+      </div>
+    </div>`;
+  window._pista=c.pista;
+  window._storageKey=storageKey;
+  document.getElementById("respInput").addEventListener("input",onTypeResponse);
+  updateSummary();
+}
+
+function onTypeResponse(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    const val=document.getElementById("respInput").value;
+    localStorage.setItem(window._storageKey,val);
+    const ind=document.getElementById("saveIndicator");
+    if(ind){ind.textContent="Guardado automáticamente.";ind.classList.add("saved");setTimeout(()=>{ind.textContent="El texto se guarda automáticamente.";ind.classList.remove("saved");},2000);}
+  },800);
+}
+
+function saveCurrentResponse(){
+  const ta=document.getElementById("respInput");
+  if(!ta||!currentUnit||!currentCat)return;
+  const txt=ta.value.trim();
+  if(!txt)return;
+  const pool=CHALLENGES[currentUnit][currentCat];
+  if(!pool||currentIndex===null)return;
+  const c=pool[currentIndex];
+  log.push({unidad:UNITS[currentUnit].label,cat:catLabels[currentCat],titulo:c.titulo,obra:c.obra,dia:c.dia==="mie"?"Miércoles":"Jueves",respuesta:txt,ts:new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"})});
+  saveLog();
+}
+function saveLog(){localStorage.setItem("lit_log_"+userName,JSON.stringify(log));}
+function loadLog(){
+  const s=localStorage.getItem("lit_log_"+userName);
+  if(s){try{log=JSON.parse(s);}catch(e){log=[];}}
+  updateSummary();
+}
+
+function toggleHint(){
+  const area=document.getElementById("hintArea");
+  if(!area)return;
+  if(hintVisible){area.innerHTML="";hintVisible=false;}
+  else{area.innerHTML=`<div class="hint-box"><strong>Pista:</strong> ${window._pista}</div>`;hintVisible=true;}
+}
+
+function showExtChallenge(tipo){
+  const pool=EXT[tipo];
+  const c=pool[Math.floor(Math.random()*pool.length)];
+  const label=tipo==="comparada"?"Tarjeta azul — literatura comparada":"Tarjeta roja — reescritura transgresora";
+  document.getElementById("extChallengeArea").innerHTML=`
+    <div style="background:var(--surface);border:0.5px solid var(--ext-border);border-radius:var(--radius);padding:1rem;margin-top:.75rem">
+      <p style="font-size:11px;font-weight:500;color:var(--ext-tx);margin-bottom:6px">${label}</p>
+      <p class="ch-title" style="color:var(--ext-tx)">${c.titulo}</p>
+      <p class="consigna" style="font-size:13px;color:var(--text-sec);margin-bottom:.75rem">${c.consigna}</p>
+      <div class="hint-box" style="margin-bottom:.75rem"><strong>Orientación:</strong> ${c.pista}</div>
+      <p class="resp-label">Tu desarrollo:</p>
+      <textarea id="extRespInput" placeholder="Escribí tu respuesta acá..." style="min-height:120px"></textarea>
+      <div class="action-row" style="margin-top:.75rem">
+        <button class="btn-outline" onclick="showExtChallenge('${tipo}')"><i class="ti ti-refresh" aria-hidden="true" style="font-size:16px"></i>Otro desafío</button>
+        <button class="btn-outline" onclick="addExtToLog('${c.titulo}','${label}')"><i class="ti ti-plus" aria-hidden="true" style="font-size:16px"></i>Agregar al resumen</button>
+      </div>
+    </div>`;
+}
+
+function addExtToLog(titulo,label){
+  const ta=document.getElementById("extRespInput");
+  if(!ta||!ta.value.trim())return;
+  log.push({unidad:"Extensión nivel 3",cat:label,titulo:titulo,obra:"Extensión",dia:"Extensión",respuesta:ta.value.trim(),ts:new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"})});
+  saveLog();updateSummary();
+  const btn=event.target.closest("button");
+  const orig=btn.innerHTML;
+  btn.innerHTML='<i class="ti ti-check" style="font-size:16px"></i> Agregado';
+  setTimeout(()=>btn.innerHTML=orig,2000);
+}
+
+function updateSummary(){
+  if(log.length===0){document.getElementById("summaryArea").style.display="none";return;}
+  document.getElementById("summaryArea").style.display="block";
+  document.getElementById("badgeCount").textContent=log.length+(log.length===1?" desafío":" desafíos");
+  let txt=`RESUMEN DE SESIÓN — Literatura 4.º Año NES\nAlumno/a: ${userName}\nFecha: ${new Date().toLocaleDateString("es-AR")}\n${"=".repeat(48)}\n\n`;
+  log.forEach((e,i)=>{txt+=`DESAFÍO ${i+1} (${e.ts}) — ${e.dia}\n${e.unidad}\nCategoría: ${e.cat}\nActividad: ${e.titulo}\nObra: ${e.obra}\n\nRespuesta:\n${e.respuesta}\n\n${"-".repeat(40)}\n\n`;});
+  txt+=`Total de desafíos realizados: ${log.length}\n`;
+  document.getElementById("summaryText").textContent=txt;
+}
+
+function copySummary(){
+  saveCurrentResponse();updateSummary();
+  const txt=document.getElementById("summaryText").textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=event.target.closest("button");
+    const orig=btn.innerHTML;
+    btn.innerHTML='<i class="ti ti-check" style="font-size:16px"></i> Copiado';
+    setTimeout(()=>btn.innerHTML=orig,2000);
+  });
+}
+</script>
+</body>
+</html>
